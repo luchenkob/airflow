@@ -1,0 +1,55 @@
+namespace: airflow
+
+mysql:
+  defines: runnable
+  inherits: monk-mysql/db
+  metadata:
+    name: mysql
+    description: MySQL database used as the metadata database for Apache Airflow.
+    icon: https://labs.mysql.com/common/logos/mysql-logo.svg?v2
+  variables:
+    image_tag:
+      type: string
+      value: latest
+      description: ''
+    monk_mysql_database:
+      type: string
+      value: monk
+      description: ''
+    monk_mysql_password:
+      type: string
+      value: monk
+      description: ''
+    monk_mysql_root_password:
+      type: string
+      value: monk
+      description: ''
+    monk_mysql_user:
+      type: string
+      value: monk
+      description: ''
+
+mssql:
+  defines: runnable
+  inherits: mssql/db
+  metadata:
+    name: mssql
+    description: >-
+      Microsoft SQL Server database used as the metadata database for Apache
+      Airflow.
+    icon: https://cdn-icons-png.flaticon.com/512/5968/5968364.png
+  variables:
+    monk_mssql_accept_eula:
+      type: string
+      value: 'Y'
+      description: ''
+    monk_mssql_sa_password:
+      type: string
+      value: P@ssw0rd
+      description: ''
+
+stack:
+  defines: group
+  members:
+    - airflow/mysql
+    - airflow/mssql
